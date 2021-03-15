@@ -4,6 +4,7 @@
 # https://stackoverflow.com/questions/29333424/gpsd-not-getting-a-good-fix
 # http://www.opengts.org/
 # https://www.linuxhelp.com/how-to-install-opengts-in-ubuntu
+#  sudo apt-get remove --auto-remove openjdk*
 # ./install
 ################################################################################
 
