@@ -80,36 +80,36 @@ sudo ln -s $GTS_HOME /usr/local/gts
 cd $GTS_HOME
 
 #Oee
-ant all
+#ant all
 
 #Then initialize the OpenGTS with the below command.
-bin/initdb.sh -rootuser=root -rootPass=123
+#bin/initdb.sh -rootuser=root -rootPass=123
 
 #Check whether everthing' s correct.
-bin/checkInstall.sh
+#bin/checkInstall.sh
 
 #Now add account and install the Track Java Servlet.
-bin/admin.sh Account -account=sysadmin -pass=password -create
-cp build/track.war /usr/local/apache-tomcat-8.5.5/webapps/
+#bin/admin.sh Account -account=sysadmin -pass=password -create
+#cp build/track.war /usr/local/apache-tomcat-8.5.5/webapps/
 
 #Restart the tomcat server for further process.
-$CATALINA_HOME/bin/shutdown.sh
+#$CATALINA_HOME/bin/shutdown.sh
 
 #Remove the webapp track files with the below command.
-user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ rm -rf /usr/local/apache-tomcat-8.5.5/webapps/track*
-user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ cp $GTS_HOME/build/track.war $CATALINA_HOME/webapps/
+##user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ rm -rf /usr/local/apache-tomcat-8.5.5/webapps/track*
+#user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ cp $GTS_HOME/build/track.war $CATALINA_HOME/webapps/
 
 #Again start the tomcat service by using the below command.
 user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ $CATALINA_HOME/bin/startup.sh
 
 #Finally run the below command to install the Event Java Servlet and gprmc package.
-/usr/local/OpenGTS_2.6.2$ ant events
-cp -v build/events.war $CATALINA_HOME/webapps
-ant gprmc
-cp build/gprmc.war /usr/local/apache-tomcat-8.5.5/webapps/
+#/usr/local/OpenGTS_2.6.2$ ant events
+#cp -v build/events.war $CATALINA_HOME/webapps
+#ant gprmc
+#cp build/gprmc.war /usr/local/apache-tomcat-8.5.5/webapps/
 
 #Again verify the installation process.
-/usr/local/OpenGTS_2.6.2$ bin/checkInstall.sh
+#/usr/local/OpenGTS_2.6.2$ bin/checkInstall.sh
 
 #localhost:8080/track/Track
 
