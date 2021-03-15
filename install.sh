@@ -1,6 +1,7 @@
   
 #!/bin/bash
 ################################################################################
+# https://stackoverflow.com/questions/29333424/gpsd-not-getting-a-good-fix
 # http://www.opengts.org/
 # https://www.linuxhelp.com/how-to-install-opengts-in-ubuntu
 # ./install
@@ -17,45 +18,53 @@ sudo /etc/init.d/mysql start
 sudo apt-get install openjdk-8-jdk
 
 #Use the below command to define the home environment for java.
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-echo " export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64"  > >  ~/.bashrc
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+echo " export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"  >>  ~/.bashrc
 
 #Now its time to install tomcat server with the below command.
-/tmp$ wget -c http://mirror.fibergrid.in/apache/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.zip
+#wget -c http://mirror.fibergrid.in/apache/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.zip
+wget https://downloads.apache.org/tomcat/tomcat-8/v8.5.64/bin/apache-tomcat-8.5.64.zip
 
 #Then extract the installed tomcat server.
-/tmp$ unzip apache-tomcat-8.5.5.zip
+unzip apache-tomcat-8.5.64.zip
 
 #Here copy the extracted tomcat server directory to the respective location. Then set that location as the home directory path.
-sudo cp -a apache-tomcat-${VER} /usr/local/
-export CATALINA_HOME=/usr/local/apache-tomcat-8.5.5
+sudo cp -a apache-tomcat-8.5.64 /usr/local/
+export CATALINA_HOME=/usr/local/apache-tomcat-8.5.64
 cd /usr/local
 sudo ln -s $CATALINA_HOME tomcat
 cd $CATALINA_HOME/bin
 chmod a+x *.sh
 $CATALINA_HOME/bin/startup.sh
-echo " export CATALINA_HOME=/usr/local/apache-tomcat-8.5.5"  > >  ~/.bashrc
+echo " export CATALINA_HOME=/usr/local/apache-tomcat-8.5.64"  >>  ~/.bashrc
 
 #Then configure the java mail and java connector with the below command.
 wget -c http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.37.zip
 unzip mysql-connector-java-5.1.37.zip
+sudo cp mysql-connector-java-5.1.37-bin.jar $JAVA_HOME/jre/lib/ext
+
+cd /tmp/
+wget -c https://maven.java.net/content/repositories/releases/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar
 sudo cp javax.mail-1.5.2.jar $JAVA_HOME/jre/lib/ext/
 sudo mv $JAVA_HOME/jre/lib/ext/javax.mail-1.5.2.jar $JAVA_HOME/jre/lib/ext/javax.mail.jar
 
 #Now you need to Download and Configure the OpenGTS with the following command.
-wget -c http://liquidtelecom.dl.sourceforge.net/project/opengts/server-base/2.6.2/OpenGTS_2.6.2.zip
-export GTS_HOME=/usr/local/OpenGTS_2.6.2
-echo " export GTS_HOME=/usr/local/OpenGTS_2.6.2"  > >  ~/.bashrc
+#wget -c http://liquidtelecom.dl.sourceforge.net/project/opengts/server-base/2.6.2/OpenGTS_2.6.2.zip
+wget -c http://gtse.us/gtsdl/OpenGTS_2.6.7.zip?t=1615813569&c=lamlie@hotmail.com&s=f8P_UOPEo70ant0qVXRAKTq2BvU=
+sudo unzip /tmp/OpenGTS_2.6.7.zip -d /usr/local/
+sudo chown -R odoo:sudo /usr/local/OpenGTS_2.6.7
+export GTS_HOME=/usr/local/OpenGTS_2.6.7
+echo " export GTS_HOME=/usr/local/OpenGTS_2.6.7"  >>  ~/.bashrc
 
 #Next configure the environmental variables.
-echo " export ANT_HOME=/usr/share/ant"  > >  ~/.bashrc
+echo " export ANT_HOME=/usr/share/ant"  >>  ~/.bashrc
 source ~/.bashrc
 sudo ln -s $JAVA_HOME /usr/local/java
 sudo ln -s $CATALINA_HOME /usr/local/tomcat
 sudo ln -s $GTS_HOME /usr/local/gts
 
 #Edit and open the Config.conf file with the below command.
-#nano /usr/local/OpenGTS_2.6.2/config.conf
+#nano /usr/local/OpenGTS_2.6.7/config.conf
 
 #While executing the above command, just uncomment the below lines
 #Db.sql.user=gts
@@ -68,6 +77,9 @@ sudo ln -s $GTS_HOME /usr/local/gts
 
 #Here you need to compile the OpenGTS.
 cd $GTS_HOME
+
+#Oee
+ant all
 
 #Then initialize the OpenGTS with the below command.
 bin/initdb.sh -rootuser=root -rootPass=123
