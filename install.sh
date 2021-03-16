@@ -2,6 +2,7 @@
 #!/bin/bash
 ################################################################################
 # https://stackoverflow.com/questions/29333424/gpsd-not-getting-a-good-fix
+# https://askubuntu.com/questions/56104/how-can-i-install-sun-oracles-proprietary-java-jdk-6-7-8-or-jre
 # http://www.opengts.org/
 # https://www.linuxhelp.com/how-to-install-opengts-in-ubuntu
 #  sudo apt-get remove --auto-remove openjdk*
@@ -16,11 +17,11 @@ sudo apt-get install apache2 php mysql-server libmysql-java ant unzip
 sudo /etc/init.d/mysql start
 
 #Next install the openjdk by using the below given command.
-sudo apt-get install openjdk-8-jdk
+#sudo apt-get install openjdk-8-jdk
 
 #Use the below command to define the home environment for java.
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-echo " export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"  >>  ~/.bashrc
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_281/
+echo " export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_281/"  >>  ~/.bashrc
 
 #Now its time to install tomcat server with the below command.
 #wget -c http://mirror.fibergrid.in/apache/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.zip
@@ -40,7 +41,8 @@ $CATALINA_HOME/bin/startup.sh
 echo " export CATALINA_HOME=/usr/local/apache-tomcat-8.5.64"  >>  ~/.bashrc
 
 #Then configure the java mail and java connector with the below command.
-wget -c http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.37.zip
+#wget -c http://dev.mysql.com/get/Downloads/Connector-J/mc-5.1.37.zip
+cd /tmp
 unzip mysql-connector-java-5.1.37.zip
 sudo cp mysql-connector-java-5.1.37-bin.jar $JAVA_HOME/jre/lib/ext
 
@@ -51,9 +53,9 @@ sudo mv $JAVA_HOME/jre/lib/ext/javax.mail-1.5.2.jar $JAVA_HOME/jre/lib/ext/javax
 
 #Now you need to Download and Configure the OpenGTS with the following command.
 #wget -c http://liquidtelecom.dl.sourceforge.net/project/opengts/server-base/2.6.2/OpenGTS_2.6.2.zip
-wget -c http://gtse.us/gtsdl/OpenGTS_2.6.7.zip?t=1615813569&c=lamlie@hotmail.com&s=f8P_UOPEo70ant0qVXRAKTq2BvU=
+#wget -c http://gtse.us/gtsdl/OpenGTS_2.6.7.zip?t=1615813569&c=lamlie@hotmail.com&s=f8P_UOPEo70ant0qVXRAKTq2BvU=
 sudo unzip /tmp/OpenGTS_2.6.7.zip -d /usr/local/
-sudo chown -R odoo:sudo /usr/local/OpenGTS_2.6.7
+sudo chown -R odoo:odoo /usr/local/OpenGTS_2.6.7
 export GTS_HOME=/usr/local/OpenGTS_2.6.7
 echo " export GTS_HOME=/usr/local/OpenGTS_2.6.7"  >>  ~/.bashrc
 
