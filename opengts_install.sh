@@ -102,7 +102,7 @@ cd $GTS_HOME
 #user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ cp $GTS_HOME/build/track.war $CATALINA_HOME/webapps/
 
 #Again start the tomcat service by using the below command.
-user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ $CATALINA_HOME/bin/startup.sh
+#user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ $CATALINA_HOME/bin/startup.sh
 
 #Finally run the below command to install the Event Java Servlet and gprmc package.
 #/usr/local/OpenGTS_2.6.2$ ant events
@@ -118,5 +118,3 @@ user1@linuxhelp:/usr/local/OpenGTS_2.6.2$ $CATALINA_HOME/bin/startup.sh
 
 
 
-
-3
