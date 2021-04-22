@@ -114,7 +114,7 @@ cd $GTS_HOME
 #/usr/local/OpenGTS_2.6.2$ bin/checkInstall.sh
 
 #localhost:8080/track/Track
-
+#sysadmin/password
 
 
 
