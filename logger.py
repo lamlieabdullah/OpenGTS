@@ -1,9 +1,19 @@
 #!/usr/bin/env python
 #####
+#
 # Read GPS nmea and save to file
-#https://www.instructables.com/Raspberry-Pi-GPS-Logger/
-#https://github.com/postronium/raspberry-pi-gps-logger
-##
+# crontab -e
+# @reboot sh /boot/gps.sh
+#
+# gps.sh
+#   #!/bin/sh
+#   sudo python /boot/logger.py
+#
+#
+# https://www.instructables.com/Raspberry-Pi-GPS-Logger/
+# https://github.com/postronium/raspberry-pi-gps-logger
+######
+
 import os
 import datetime
 import serial
